@@ -4,24 +4,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace LvvlStarterNetApi.SharedKernel.Services
 {
     public class LoggerService : ILoggerService
     {
-        public void LogError()
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+
+        public LoggerService()
         {
-            Console.WriteLine("Error Log");
+        }
+        public void LogError(string message)
+        {
+            logger.Error(message);
         }
 
-        public void LogInfo()
+        public void LogInfo(string message)
         {
-            Console.WriteLine("Info Log");
+            logger.Info(message);
         }
 
-        public void LogWarning()
+        public void LogWarning(string message)
         {
-            Console.WriteLine("Warning Log");
+            logger.Warn(message);
+        }
+
+        public void LogDebug(string message)
+        {
+            logger.Debug(message);
         }
     }
 }

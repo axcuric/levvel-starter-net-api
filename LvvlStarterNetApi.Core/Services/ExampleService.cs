@@ -9,24 +9,29 @@ namespace LvvlStarterNetApi.Core.Services
 {
     public class ExampleService : IExampleService
     {
+        private readonly ILoggerService _logger;
+        public ExampleService(ILoggerService loggerService)
+        {
+            _logger = loggerService;
+        }
         public void Add()
         {
-            throw new NotImplementedException();
+            _logger.LogDebug("Add");
         }
 
         public void Delete()
         {
-            throw new NotImplementedException();
+            _logger.LogDebug("Delete");
         }
 
         public void Get()
         {
-            throw new NotImplementedException();
+            _logger.LogDebug("Get");
         }
 
         public void Update()
         {
-            throw new NotImplementedException();
+            _logger.LogDebug("Update");
         }
     }
 }

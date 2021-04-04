@@ -23,7 +23,7 @@ namespace LvvlStarterNetApi.Api.Controllers
         [HttpPost]
         public ActionResult Post()
         {
-            _logger.LogInfo();
+            _logger.LogInfo("Enters Post");
             _exampleService.Add();
             return Ok();
         }
@@ -31,7 +31,7 @@ namespace LvvlStarterNetApi.Api.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            _logger.LogInfo();
+            _logger.LogInfo("Enters Get");
             _exampleService.Get();
             return Ok();
         }
@@ -39,7 +39,7 @@ namespace LvvlStarterNetApi.Api.Controllers
         [HttpPut]
         public ActionResult Put()
         {
-            _logger.LogInfo();
+            _logger.LogInfo("Enters Put");
             _exampleService.Update();
             return Ok();
         }
@@ -47,7 +47,7 @@ namespace LvvlStarterNetApi.Api.Controllers
         [HttpDelete]
         public ActionResult Delete()
         {
-            _logger.LogInfo();
+            _logger.LogInfo("Enters Delete");
             _exampleService.Delete();
             return Ok();
         }
