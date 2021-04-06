@@ -1,3 +1,4 @@
+using LvvlStarterNetApi.Api.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,7 +27,7 @@ namespace LvvlStarterNetApi.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.ConfigureExtensionServices();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -45,6 +46,8 @@ namespace LvvlStarterNetApi.Api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("CorsPolicy");
 
             app.UseRouting();
 
