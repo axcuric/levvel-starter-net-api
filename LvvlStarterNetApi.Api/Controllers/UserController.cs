@@ -1,4 +1,6 @@
-﻿using LvvlStarterNetApi.Core.Models;
+﻿using AutoMapper;
+using LvvlStarterNetApi.Core.Dtos;
+using LvvlStarterNetApi.Core.Models;
 using LvvlStarterNetApi.SharedKernel.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +17,12 @@ namespace LvvlStarterNetApi.Api.Controllers
     {
         private readonly ILoggerService _logger;
         private readonly IUserService<User> _userService;
-        public UserController(ILoggerService logger, IUserService<User> userService)
+        private readonly IMapper _mapper;
+        public UserController(ILoggerService logger, IUserService<User> userService, IMapper mapper)
         {
             _logger = logger;
             _userService = userService;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -52,12 +56,13 @@ namespace LvvlStarterNetApi.Api.Controllers
         public IActionResult Get()
         {
             _logger.LogInfo("Enters Get");
-            var user = _userService.Get();
-            if (user == null)
+            var users = _userService.Get();
+            if (users == null)
             {
                 return NotFound();
             }
-            return Ok(user);
+            var userDtos = _mapper.Map<IEnumerable<UserDto>>(users);
+            return Ok(userDtos);
         }
 
         /// <summary>
@@ -77,7 +82,8 @@ namespace LvvlStarterNetApi.Api.Controllers
             {
                 return NotFound();
             }
-            return Ok(user);
+            var userDto = _mapper.Map<IEnumerable<UserDto>>(user);
+            return Ok(userDto);
         }
 
         /// <summary>

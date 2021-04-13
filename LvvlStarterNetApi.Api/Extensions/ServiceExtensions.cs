@@ -19,7 +19,6 @@ namespace LvvlStarterNetApi.Api.Extensions
     {
         public static void ConfigureRepositoryManager(this IServiceCollection service)
         {
-            service.AddScoped<ILoggerService, LoggerService>();
             service.AddScoped<IRepositoryManager<User>, RepositoryManager<User>>();
         }
 
