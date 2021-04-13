@@ -41,8 +41,24 @@ namespace LvvlStarterNetApi.Infrastructure
             }
         }
 
-        public void Save() => _context.SaveChanges();
+        public bool Save()
+        {
+            var affected = _context.SaveChanges();
+            if (affected == 1)
+            {
+                return true;
+            }
+            return false;
+        }
 
-        public async Task SaveAsync() => await _context.SaveChangesAsync();
+        public async Task<bool> SaveAsync()
+        {
+            var affected = await _context.SaveChangesAsync();
+            if (affected == 1)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

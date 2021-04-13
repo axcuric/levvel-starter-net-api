@@ -32,25 +32,29 @@ namespace LvvlStarterNetApi.Core.Services
             _logger.LogDebug("GetByCondition UserService");
             return _repositoryManager.ReadService.FindByCondition(expression, trackChanges);
         }
-        public void Add(User user)
+        public bool Add(User user)
         {
             _logger.LogInfo("Add UserService");
             _repositoryManager.WriteService.Create(user);
+            return _repositoryManager.Save();
         }
-        public async Task AddAsync(User user)
+        public async Task<bool> AddAsync(User user)
         {
             _logger.LogInfo("AddAsync UserService");
             await _repositoryManager.WriteService.CreateAsync(user);
+            return await _repositoryManager.SaveAsync();
         }
-        public void Update(User user)
+        public bool Update(User user)
         {
             _logger.LogDebug("Update UserService");
             _repositoryManager.WriteService.Update(user);
+            return _repositoryManager.Save();
         }
-        public void Delete(User user)
+        public bool Delete(User user)
         {
             _logger.LogDebug("Delete UserService");
             _repositoryManager.WriteService.Delete(user);
+            return _repositoryManager.Save();
         }
 
     }

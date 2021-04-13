@@ -54,5 +54,4 @@ namespace LvvlStarterNetApi.Api.Extensions
         //public static void ConfigureDataBaseContext(this IServiceCollection services) =>
         //    services.AddDbContext<CliDbExampleContext>(opt => opt.UseInMemoryDatabase("CliDataBaseInMemory"));
     }
-
 }

@@ -22,84 +22,98 @@ namespace LvvlStarterNetApi.Api.Controllers
         }
 
         /// <summary>
-        /// Deletes an ExampleItem to the Db by a given Id.
+        /// Deletes an User to the Db by a given Id.
         /// </summary>
-        /// <param name="user">Id from ExampleItem to delete.</param>  
-        /// <response code="204">Returned if the example item was deleted</response>  
-        /// <response code="400">Returned if the model couldn&#8217;t be deleted</response> 
-        [HttpDelete]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        /// <param name="id">Id from User to delete.</param>  
+        /// <response code="204">Returned if the User was deleted</response>  
+        /// <response code="404">Returned if User wasn&#8217;t found</response> 
+        [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        //TODO: change from User model to string id
         public IActionResult Delete(User user)
         {
             _logger.LogInfo("Enters Delete");
-            _userService.Delete(user);
-            return NoContent();
-            //return NotFound();
-        }
-
-        /// <summary>
-        /// Retrieves all ExampleItems from the Db.
-        /// </summary>
-        /// <response code="200">Returned if the example item was created</response>  
-        /// <response code="404">Returned if the example items weren&#8217;t found</response>  
-        [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Get()
-        {
-            _logger.LogInfo("Enters Get");
-            return Ok(_userService.Get());
-            //return NotFound();
-        }
-
-        /// <summary>
-        /// Retrieves a single ExampleItem by Id from the Db.
-        /// </summary>
-        /// <param name="id">Id from ExampleItem to delete.</param>  
-        /// <response code="200">Returned if the example items was found and retrieved</response>  
-        /// <response code="404">Returned if the example item wasn&#8217;t found on the Db</response> 
-        [HttpGet("{id}", Name = "ExampleItemById")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetExampleItemById(int id)
-        {
-            _logger.LogInfo("Enters GetExampleItemById");
-            if (true)
+            if (_userService.Delete(user))
             {
-                return Ok(_userService.GetById(id));
+                return NoContent();
             }
-            //return NotFound();
-        }
-
-        /// <summary>
-        /// Updates an ExampleItem from the Db.
-        /// </summary>
-        /// <param name="user">ExampleItem with updated values.</param>  
-        /// <response code="200">Returned if the example item was updated</response>  
-        /// <response code="404">Returned if the model wasn&#8217;t found on the DB</response>
-        [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Put(User user)
-        {
-            _logger.LogInfo("Enters Put");
-            if (user != null)
-            {
-                _userService.Update(user);
-                return Ok();
-            } 
             return NotFound();
         }
 
         /// <summary>
-        /// Adds an ExampleItem to the Db.
+        /// Retrieves all Users from the Db.
         /// </summary>
-        /// <param name="user">Model to create a new example item</param>
-        /// <response code="200">Returned if the example item was created</response>  
+        /// <response code="200">Returned if the User was created</response>  
+        /// <response code="404">Returned if the User items weren&#8217;t found</response>  
+        [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public IActionResult Get()
+        {
+            _logger.LogInfo("Enters Get");
+            var user = _userService.Get();
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
+        /// <summary>
+        /// Retrieves a single User by Id from the Db.
+        /// </summary>
+        /// <param name="id">Id from User to delete.</param>  
+        /// <response code="200">Returned if the Users was found and retrieved</response>  
+        /// <response code="404">Returned if the User wasn&#8217;t found on the Db</response> 
+        [HttpGet("{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public IActionResult GetExampleItemById(int id)
+        {
+            _logger.LogInfo("Enters GetExampleItemById");
+            var user = _userService.GetById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
+        /// <summary>
+        /// Updates an User from the Db.
+        /// </summary>
+        /// <param name="user">User with updated values.</param>  
+        /// <response code="200">Returned if the User was updated</response>  
+        /// <response code="400">Returned if User object sent is wrong</response>
+        /// <response code="404">Returned if the model wasn&#8217;t found on the DB</response>
+        [HttpPut]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult Put(User user)
+        {
+            _logger.LogInfo("Enters Put");
+            if (user == null)
+            {
+                return BadRequest("User object is null");
+            }
+            if (_userService.Update(user))
+            {
+                return Ok();
+            }
+            return NotFound();
+        }
+
+        /// <summary>
+        /// Adds an User to the Db.
+        /// </summary>
+        /// <param name="user">Model to create a new User</param>
+        /// <response code="201">Returned if the User was created</response>  
         /// <response code="400">Returned if the model couldn&#8217;t be saved or model is empty</response>  
-        /// <response code="500">Returned when an error ocurred on Add ExampleItem action</response>   
         [HttpPost]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
         public IActionResult Post(User user)
         {
             _logger.LogInfo("Enters Post");
@@ -107,15 +121,13 @@ namespace LvvlStarterNetApi.Api.Controllers
             {
                 return BadRequest("User object is null");
             }
-
-            if (!ModelState.IsValid)
+            
+            if (_userService.Add(user))
             {
-                return BadRequest("Invalid model object");
+                //CreatedAtAction
+                return Ok();
             }
-            //await
-            _userService.Add(user);
-            //CreatedAtAction
-            return Ok();
+            return BadRequest();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace LvvlStarterNetApi.SharedKernel.Interfaces
     {
         IReadService<T> ReadService { get; }
         IWriteService<T> WriteService { get; }
-        void Save();
-        Task SaveAsync();
+        bool Save();
+        Task<bool> SaveAsync();
     }
 }

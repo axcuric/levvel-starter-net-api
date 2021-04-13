@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace LvvlStarterNetApi.SharedKernel.Interfaces
 {
-    public interface IExampleService<T>
+    public interface IUserService<T>
     {
-        void Add(T entity);
-        void Update(T entity);
-        void Delete(T entity);
+        bool Add(T entity);
+        bool Update(T entity);
+        bool Delete(T entity);
         IQueryable<T> Get();
         T GetById(int id);
         IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression, bool trackChanges);
