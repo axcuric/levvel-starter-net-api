@@ -169,138 +169,119 @@ namespace LvvlStarterNetApi.Infrastructure.Context.Data
 
                 context.Phones.AddRange(
 
-                    new Phone { PhoneId = 1, PhoneNumber = "697-555-0142", PhoneNumberTypeId = 1, UserId = 1 },
+                    new Phone { PhoneId = 1, PhoneNumber = "697-555-0142", UserId = 1 },
                     new Phone
                     {
                         PhoneId = 2,
                         PhoneNumber = "819-555-0175",
-                        PhoneNumberTypeId = 3,
                         UserId = 2
                     },
                     new Phone
                     {
                         PhoneId = 3,
                         PhoneNumber = "212-555-0187",
-                        PhoneNumberTypeId = 1,
                         UserId = 3
                     },
                     new Phone
                     {
                         PhoneId = 4,
                         PhoneNumber = "612-555-0100",
-                        PhoneNumberTypeId = 1,
                         UserId = 4
                     },
                     new Phone
                     {
                         PhoneId = 5,
                         PhoneNumber = "849-555-0139",
-                        PhoneNumberTypeId = 1,
                         UserId = 5
                     },
                     new Phone
                     {
                         PhoneId = 6,
                         PhoneNumber = "122-555-0189",
-                        PhoneNumberTypeId = 3,
                         UserId = 6
                     },
                     new Phone
                     {
                         PhoneId = 7,
                         PhoneNumber = "181-555-0156",
-                        PhoneNumberTypeId = 3,
                         UserId = 7
                     },
                     new Phone
                     {
                         PhoneId = 8,
                         PhoneNumber = "815-555-0138",
-                        PhoneNumberTypeId = 1,
                         UserId = 8
                     },
                     new Phone
                     {
                         PhoneId = 9,
                         PhoneNumber = "185-555-0186",
-                        PhoneNumberTypeId = 1,
                         UserId = 9
                     },
                     new Phone
                     {
                         PhoneId = 10,
                         PhoneNumber = "330-555-2568",
-                        PhoneNumberTypeId = 3,
                         UserId = 10
                     },
                     new Phone
                     {
                         PhoneId = 11,
                         PhoneNumber = "719-555-0181",
-                        PhoneNumberTypeId = 1,
                         UserId = 11
                     },
                     new Phone
                     {
                         PhoneId = 12,
                         PhoneNumber = "168-555-0183",
-                        PhoneNumberTypeId = 3,
                         UserId = 12
                     },
                     new Phone
                     {
                         PhoneId = 13,
                         PhoneNumber = "473-555-0117",
-                        PhoneNumberTypeId = 3,
                         UserId = 13
                     },
                     new Phone
                     {
                         PhoneId = 14,
                         PhoneNumber = "465-555-0156",
-                        PhoneNumberTypeId = 1,
                         UserId = 14
                     },
                     new Phone
                     {
                         PhoneId = 15,
                         PhoneNumber = "970-555-0138",
-                        PhoneNumberTypeId = 1,
                         UserId = 15
                     },
                     new Phone
                     {
                         PhoneId = 16,
                         PhoneNumber = "913-555-0172",
-                        PhoneNumberTypeId = 3,
                         UserId = 16
                     },
                     new Phone
                     {
                         PhoneId = 17,
                         PhoneNumber = "150-555-0189",
-                        PhoneNumberTypeId = 1,
                         UserId = 17
                     },
                     new Phone
                     {
                         PhoneId = 18,
                         PhoneNumber = "486-555-0150",
-                        PhoneNumberTypeId = 3,
                         UserId = 18
                     },
                     new Phone
                     {
                         PhoneId = 19,
                         PhoneNumber = "124-555-0114",
-                        PhoneNumberTypeId = 1,
                         UserId = 19
                     },
                     new Phone
                     {
                         PhoneId = 20,
                         PhoneNumber = "708-555-0141",
-                        PhoneNumberTypeId = 3,
                         UserId = 20
                     }
                     );
