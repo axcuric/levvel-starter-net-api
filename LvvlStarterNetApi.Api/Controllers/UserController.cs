@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LvvlStarterNetApi.Api.Controllers
 {
-    [Route("api/ExampleItems")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {

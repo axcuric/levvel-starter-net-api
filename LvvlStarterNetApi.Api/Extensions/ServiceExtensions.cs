@@ -1,7 +1,7 @@
 ﻿using LvvlStarterNetApi.Core.Services;
 using LvvlStarterNetApi.Infrastructure.Context;
 using LvvlStarterNetApi.SharedKernel.Interfaces;
-using LvvlStarterNetApi.SharedKernel.Services;
+using LvvlStarterNetApi.SharedKernel.SharedServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
@@ -50,7 +50,7 @@ namespace LvvlStarterNetApi.Api.Extensions
                 options.IncludeXmlComments(filePath);
             });
 
-        //public static void ConfigureDataBaseContext(this IServiceCollection services) =>
-        //    services.AddDbContext<CliDbExampleContext>(opt => opt.UseInMemoryDatabase("CliDataBaseInMemory"));
+        public static void ConfigureDataBaseContext(this IServiceCollection services) =>
+            services.AddDbContext<CliDbExampleContext>(opt => opt.UseInMemoryDatabase("CliDataBaseInMemory"));
     }
 }
