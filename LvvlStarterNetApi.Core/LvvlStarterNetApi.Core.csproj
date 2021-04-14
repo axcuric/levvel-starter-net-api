@@ -8,4 +8,8 @@
     <ProjectReference Include="..\LvvlStarterNetApi.SharedKernel\LvvlStarterNetApi.SharedKernel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
 </Project>

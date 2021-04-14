@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NLog;
 
-namespace LvvlStarterNetApi.SharedKernel.Services
+namespace LvvlStarterNetApi.SharedKernel.SharedServices
 {
     public class LoggerService : ILoggerService
     {

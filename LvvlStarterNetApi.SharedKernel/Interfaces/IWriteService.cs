@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace LvvlStarterNetApi.SharedKernel.Interfaces
 {
-    public interface IExampleService
+    public interface IWriteService<T>
     {
-        void Add();
-        void Update();
-        void Delete();
-        void Get();
+        void Create(T entity);
+        Task CreateAsync(T entity);
+        void Update(T entity);
+        void Delete(T entity);
     }
 }
