@@ -30,13 +30,13 @@ namespace LvvlStarterNetApi.Infrastructure.Repository
 
             if (record != null)
             {
-                var entities = GetEntityNames();
+                var (collections, references) = GetEntityNames();
 
                 // Eager load all the tables referenced by the generic type T
-                foreach (var entity in entities.collections)
+                foreach (var entity in collections)
                     _context.Entry(record).Collection(entity).Load();
 
-                foreach (var entity in entities.references)
+                foreach (var entity in references)
                     _context.Entry(record).Reference(entity).Load();
             }
 

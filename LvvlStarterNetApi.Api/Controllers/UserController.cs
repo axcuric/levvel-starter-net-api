@@ -28,10 +28,10 @@ namespace LvvlStarterNetApi.Api.Controllers
         /// <summary>
         /// Deletes an User to the Db by a given Id.
         /// </summary>
-        /// <param name="id">Id from User to delete.</param>  
+        /// <param name="user">User to delete.</param>  
         /// <response code="204">Returned if the User was deleted</response>  
         /// <response code="404">Returned if User wasn&#8217;t found</response> 
-        [HttpDelete("{id}")]
+        [HttpDelete]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
         //TODO: change from User model to string id
@@ -82,7 +82,7 @@ namespace LvvlStarterNetApi.Api.Controllers
             {
                 return NotFound();
             }
-            var userDto = _mapper.Map<IEnumerable<UserDto>>(user);
+            var userDto = _mapper.Map<UserDto>(user);
             return Ok(userDto);
         }
 

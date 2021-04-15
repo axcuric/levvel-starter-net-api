@@ -48,11 +48,11 @@ namespace LvvlStarterNetApi.Infrastructure.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Phones)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserPhones_Users");
+                //entity.HasOne(d => d.User)
+                //    .WithMany(p => p.Phones)
+                //    .HasForeignKey(d => d.UserId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_UserPhones_Users");
             });
             base.OnModelCreating(modelBuilder);
         }
