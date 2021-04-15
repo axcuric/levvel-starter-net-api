@@ -15,21 +15,20 @@ namespace LvvlStarterNetApi.Core.Services
         {
             _logger = loggerService;
             _repositoryManager = repositoryManager;
-
         }
         public IQueryable<User> Get()
         {
-            _logger.LogDebug("Get UserService");
+            _logger.LogInfo("Get UserService");
             return _repositoryManager.ReadService.GetAll(true);
         }
         public User GetById(int id)
         {
-            _logger.LogDebug("GetById UserService");
+            _logger.LogInfo("GetById UserService");
             return _repositoryManager.ReadService.GetById(id);
         }
         public IQueryable<User> GetByCondition(Expression<Func<User, bool>> expression, bool trackChanges)
         {
-            _logger.LogDebug("GetByCondition UserService");
+            _logger.LogInfo("GetByCondition UserService");
             return _repositoryManager.ReadService.FindByCondition(expression, trackChanges);
         }
         public bool Add(User user)
@@ -46,13 +45,13 @@ namespace LvvlStarterNetApi.Core.Services
         }
         public bool Update(User user)
         {
-            _logger.LogDebug("Update UserService");
+            _logger.LogInfo("Update UserService");
             _repositoryManager.WriteService.Update(user);
             return _repositoryManager.Save();
         }
         public bool Delete(User user)
         {
-            _logger.LogDebug("Delete UserService");
+            _logger.LogInfo("Delete UserService");
             _repositoryManager.WriteService.Delete(user);
             return _repositoryManager.Save();
         }

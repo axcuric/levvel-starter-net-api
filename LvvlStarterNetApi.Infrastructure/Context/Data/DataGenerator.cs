@@ -16,12 +16,6 @@ namespace LvvlStarterNetApi.Infrastructure.Context.Data
             using (var context = new CliDbExampleContext(
                 serviceProvider.GetRequiredService<DbContextOptions<CliDbExampleContext>>()))
             {
-                // Look for any board games.
-                //if (context..BoardGames.Any())
-                //{
-                //    return;   // Data was already seeded
-                //}
-
                 #region Users 
                 context.Users.AddRange(
                     new User
