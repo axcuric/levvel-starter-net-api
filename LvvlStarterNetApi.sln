@@ -19,9 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LvvlStarterNetApi.SharedKer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LvvlStarterNetApi.Api", "LvvlStarterNetApi.Api\LvvlStarterNetApi.Api.csproj", "{6C5D1BB4-B36D-4998-9F0B-C9CE16E98A30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LvvlStarterNetApi.SharedKernel", "LvvlStarterNetApi.SharedKernel\LvvlStarterNetApi.SharedKernel.csproj", "{F19353A9-FC0E-4DF9-AD15-8E51BF5EB02F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LvvlStarterNetApi.SharedKernel", "LvvlStarterNetApi.SharedKernel\LvvlStarterNetApi.SharedKernel.csproj", "{F19353A9-FC0E-4DF9-AD15-8E51BF5EB02F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LvvlStarterNetApi.Tests", "LvvlStarterNetApi.Tests\LvvlStarterNetApi.Tests.csproj", "{944D3ED7-67C1-4BC2-9CE5-89A946A8C469}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LvvlStarterNetApi.Tests", "LvvlStarterNetApi.Tests\LvvlStarterNetApi.Tests.csproj", "{944D3ED7-67C1-4BC2-9CE5-89A946A8C469}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
