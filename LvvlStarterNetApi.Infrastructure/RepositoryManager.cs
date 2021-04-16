@@ -44,7 +44,7 @@ namespace LvvlStarterNetApi.Infrastructure
         public bool Save()
         {
             var affected = _context.SaveChanges();
-            if (affected == 1)
+            if (affected > 0)
             {
                 return true;
             }
@@ -54,7 +54,7 @@ namespace LvvlStarterNetApi.Infrastructure
         public async Task<bool> SaveAsync()
         {
             var affected = await _context.SaveChangesAsync();
-            if (affected == 1)
+            if (affected > 0)
             {
                 return true;
             }

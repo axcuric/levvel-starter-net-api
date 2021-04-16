@@ -161,6 +161,8 @@ namespace LvvlStarterNetApi.Infrastructure.Context.Data
                     );
                 #endregion
 
+                #region Phones 
+
                 context.Phones.AddRange(
 
                     new Phone { PhoneId = 1, PhoneNumber = "697-555-0142", UserId = 1 },
@@ -279,6 +281,8 @@ namespace LvvlStarterNetApi.Infrastructure.Context.Data
                         UserId = 20
                     }
                     );
+                #endregion
+
                 context.SaveChanges();
             }
         }

@@ -12,7 +12,7 @@ namespace LvvlStarterNetApi.Core.Models
         public string PhoneNumber { get; set; }
         public int UserId { get; set; }
 
-        [System.Text.Json.Serialization.JsonIgnore]
-        public virtual User User { get; set; }
+        //[System.Text.Json.Serialization.JsonIgnore]
+        //public virtual User User { get; set; }
     }
 }
