@@ -1,17 +1,16 @@
-﻿using LvvlStarterNetApi.Core.Services;
+﻿using LvvlStarterNetApi.Core.Models;
+using LvvlStarterNetApi.Core.Services;
+using LvvlStarterNetApi.Infrastructure;
 using LvvlStarterNetApi.Infrastructure.Context;
 using LvvlStarterNetApi.SharedKernel.Interfaces;
 using LvvlStarterNetApi.SharedKernel.SharedServices;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Reflection;
-using LvvlStarterNetApi.Core.Models;
-using LvvlStarterNetApi.Infrastructure;
 
 namespace LvvlStarterNetApi.Api.Extensions
 {
@@ -35,7 +34,6 @@ namespace LvvlStarterNetApi.Api.Extensions
         public static void ConfigureIISIntegration(this IServiceCollection services) =>
             services.Configure<IISOptions>(options =>
             {
-
             });
 
         public static void ConfigureLoggerService(this IServiceCollection services) =>

@@ -2,12 +2,8 @@
 using LvvlStarterNetApi.Core.Dtos;
 using LvvlStarterNetApi.Core.Models;
 using LvvlStarterNetApi.SharedKernel.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LvvlStarterNetApi.Api.Controllers
 {
@@ -18,6 +14,7 @@ namespace LvvlStarterNetApi.Api.Controllers
         private readonly ILoggerService _logger;
         private readonly IUserService<User> _userService;
         private readonly IMapper _mapper;
+
         public UserController(ILoggerService logger, IUserService<User> userService, IMapper mapper)
         {
             _logger = logger;
@@ -28,9 +25,9 @@ namespace LvvlStarterNetApi.Api.Controllers
         /// <summary>
         /// Deletes an User to the Db by a given Id.
         /// </summary>
-        /// <param name="user">User to delete.</param>  
-        /// <response code="204">Returned if the User was deleted</response>  
-        /// <response code="404">Returned if User wasn&#8217;t found</response> 
+        /// <param name="user">User to delete.</param>
+        /// <response code="204">Returned if the User was deleted</response>
+        /// <response code="404">Returned if User wasn&#8217;t found</response>
         [HttpDelete]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
@@ -48,8 +45,8 @@ namespace LvvlStarterNetApi.Api.Controllers
         /// <summary>
         /// Retrieves all Users from the Db.
         /// </summary>
-        /// <response code="200">Returned if the User was created</response>  
-        /// <response code="404">Returned if the User items weren&#8217;t found</response>  
+        /// <response code="200">Returned if the User was created</response>
+        /// <response code="404">Returned if the User items weren&#8217;t found</response>
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -68,9 +65,9 @@ namespace LvvlStarterNetApi.Api.Controllers
         /// <summary>
         /// Retrieves a single User by Id from the Db.
         /// </summary>
-        /// <param name="id">Id from User to delete.</param>  
-        /// <response code="200">Returned if the Users was found and retrieved</response>  
-        /// <response code="404">Returned if the User wasn&#8217;t found on the Db</response> 
+        /// <param name="id">Id from User to delete.</param>
+        /// <response code="200">Returned if the Users was found and retrieved</response>
+        /// <response code="404">Returned if the User wasn&#8217;t found on the Db</response>
         [HttpGet("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -89,8 +86,8 @@ namespace LvvlStarterNetApi.Api.Controllers
         /// <summary>
         /// Updates an User from the Db.
         /// </summary>
-        /// <param name="user">User with updated values.</param>  
-        /// <response code="200">Returned if the User was updated</response>  
+        /// <param name="user">User with updated values.</param>
+        /// <response code="200">Returned if the User was updated</response>
         /// <response code="400">Returned if User object sent is wrong</response>
         /// <response code="404">Returned if the model wasn&#8217;t found on the DB</response>
         [HttpPut]
@@ -115,8 +112,8 @@ namespace LvvlStarterNetApi.Api.Controllers
         /// Adds an User to the Db.
         /// </summary>
         /// <param name="user">Model to create a new User</param>
-        /// <response code="201">Returned if the User was created</response>  
-        /// <response code="400">Returned if the model couldn&#8217;t be saved or model is empty</response>  
+        /// <response code="201">Returned if the User was created</response>
+        /// <response code="400">Returned if the model couldn&#8217;t be saved or model is empty</response>
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
@@ -127,7 +124,7 @@ namespace LvvlStarterNetApi.Api.Controllers
             {
                 return BadRequest("User object is null");
             }
-            
+
             if (_userService.Add(user))
             {
                 //TODO: Change to CreatedAtAction

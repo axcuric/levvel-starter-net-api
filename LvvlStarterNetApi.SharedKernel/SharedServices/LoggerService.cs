@@ -1,9 +1,4 @@
 ﻿using LvvlStarterNetApi.SharedKernel.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NLog;
 
 namespace LvvlStarterNetApi.SharedKernel.SharedServices
@@ -15,6 +10,7 @@ namespace LvvlStarterNetApi.SharedKernel.SharedServices
         public LoggerService()
         {
         }
+
         public void LogError(string message)
         {
             logger.Error(message);

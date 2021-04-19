@@ -6,14 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LvvlStarterNetApi.Infrastructure.Repository
 {
     public class ReadRepository<T> : IReadService<T> where T : class
     {
         private readonly CliDbExampleContext _context;
+
         public ReadRepository(CliDbExampleContext context)
         {
             _context = context;
@@ -65,7 +64,6 @@ namespace LvvlStarterNetApi.Infrastructure.Repository
 
             return (collections: collections, references: classes);
         }
-
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges) =>
            !trackChanges ?

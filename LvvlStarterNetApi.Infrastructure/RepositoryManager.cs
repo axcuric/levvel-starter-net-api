@@ -1,11 +1,7 @@
 ﻿using LvvlStarterNetApi.Infrastructure.Context;
-using LvvlStarterNetApi.SharedKernel.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LvvlStarterNetApi.Infrastructure.Repository;
+using LvvlStarterNetApi.SharedKernel.Interfaces;
+using System.Threading.Tasks;
 
 namespace LvvlStarterNetApi.Infrastructure
 {
@@ -29,7 +25,6 @@ namespace LvvlStarterNetApi.Infrastructure
                 return _readService;
             }
         }
-
 
         public IWriteService<T> WriteService
         {
