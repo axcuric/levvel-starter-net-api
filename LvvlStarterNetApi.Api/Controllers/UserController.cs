@@ -2,12 +2,8 @@
 using LvvlStarterNetApi.Core.Dtos;
 using LvvlStarterNetApi.Core.Models;
 using LvvlStarterNetApi.SharedKernel.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LvvlStarterNetApi.Api.Controllers
 {
@@ -16,68 +12,50 @@ namespace LvvlStarterNetApi.Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly ILoggerService _logger;
-        private readonly IUserService<User> _userService;
+        private readonly IRepositoryManager<User> _repositoryManager;
         private readonly IMapper _mapper;
-        public UserController(ILoggerService logger, IUserService<User> userService, IMapper mapper)
+
+        public UserController(ILoggerService logger, 
+            IRepositoryManager<User> repositoryManager,
+            IMapper mapper)
         {
             _logger = logger;
-            _userService = userService;
+            _repositoryManager = repositoryManager;
             _mapper = mapper;
         }
-
-        /// <summary>
-        /// Deletes an User to the Db by a given Id.
-        /// </summary>
-        /// <param name="user">User to delete.</param>  
-        /// <response code="204">Returned if the User was deleted</response>  
-        /// <response code="404">Returned if User wasn&#8217;t found</response> 
-        [HttpDelete]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(404)]
-        //TODO: change from User model to string id
-        public IActionResult Delete(User user)
-        {
-            _logger.LogInfo("Enters Delete");
-            if (_userService.Delete(user))
-            {
-                return NoContent();
-            }
-            return NotFound();
-        }
-
+        
         /// <summary>
         /// Retrieves all Users from the Db.
         /// </summary>
-        /// <response code="200">Returned if the User was created</response>  
-        /// <response code="404">Returned if the User items weren&#8217;t found</response>  
+        /// <response code="200">Returned if the User was created</response>
+        /// <response code="404">Returned if the User items weren&#8217;t found</response>
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         public IActionResult Get()
         {
             _logger.LogInfo("Enters Get");
-            var users = _userService.Get();
+            var users = _repositoryManager.ReadService.GetAll(true);
             if (users == null)
             {
                 return NotFound();
             }
-            var userDtos = _mapper.Map<IEnumerable<UserDto>>(users);
-            return Ok(userDtos);
+            return Ok(_mapper.Map<IEnumerable<UserDto>>(users));
         }
 
         /// <summary>
         /// Retrieves a single User by Id from the Db.
         /// </summary>
-        /// <param name="id">Id from User to delete.</param>  
-        /// <response code="200">Returned if the Users was found and retrieved</response>  
-        /// <response code="404">Returned if the User wasn&#8217;t found on the Db</response> 
+        /// <param name="id">Id from User to delete.</param>
+        /// <response code="200">Returned if the Users was found and retrieved</response>
+        /// <response code="404">Returned if the User wasn&#8217;t found on the Db</response>
         [HttpGet("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public IActionResult GetExampleItemById(int id)
+        public IActionResult GetById(int id)
         {
             _logger.LogInfo("Enters GetExampleItemById");
-            var user = _userService.GetById(id);
+            var user = _repositoryManager.ReadService.GetById(id);
             if (user == null)
             {
                 return NotFound();
@@ -89,8 +67,8 @@ namespace LvvlStarterNetApi.Api.Controllers
         /// <summary>
         /// Updates an User from the Db.
         /// </summary>
-        /// <param name="user">User with updated values.</param>  
-        /// <response code="200">Returned if the User was updated</response>  
+        /// <param name="user">User with updated values.</param>
+        /// <response code="200">Returned if the User was updated</response>
         /// <response code="400">Returned if User object sent is wrong</response>
         /// <response code="404">Returned if the model wasn&#8217;t found on the DB</response>
         [HttpPut]
@@ -104,7 +82,10 @@ namespace LvvlStarterNetApi.Api.Controllers
             {
                 return BadRequest("User object is null");
             }
-            if (_userService.Update(user))
+
+            _repositoryManager.WriteService.Update(user);
+
+            if (_repositoryManager.Save())
             {
                 return Ok();
             }
@@ -115,8 +96,8 @@ namespace LvvlStarterNetApi.Api.Controllers
         /// Adds an User to the Db.
         /// </summary>
         /// <param name="user">Model to create a new User</param>
-        /// <response code="201">Returned if the User was created</response>  
-        /// <response code="400">Returned if the model couldn&#8217;t be saved or model is empty</response>  
+        /// <response code="201">Returned if the User was created</response>
+        /// <response code="400">Returned if the model couldn&#8217;t be saved or model is empty</response>
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
@@ -127,13 +108,40 @@ namespace LvvlStarterNetApi.Api.Controllers
             {
                 return BadRequest("User object is null");
             }
-            
-            if (_userService.Add(user))
+
+            _repositoryManager.WriteService.Create(user);
+
+            if (_repositoryManager.Save())
             {
-                //TODO: Change to CreatedAtAction
                 return Ok();
             }
             return BadRequest();
+        }
+
+        /// <summary>
+        /// Deletes an User to the Db by a given Id.
+        /// </summary>
+        /// <param name="id">User ID to delete.</param>
+        /// <response code="204">Returned if the User was deleted</response>
+        /// <response code="404">Returned if User wasn&#8217;t found</response>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult Delete(int id)
+        {
+            _logger.LogInfo("Enters Delete");
+
+            var user = _repositoryManager.ReadService.GetById(id);
+            if (user != null)
+            {
+                _repositoryManager.WriteService.Delete(user);
+
+                if (_repositoryManager.Save())
+                {
+                    return NoContent();
+                }                
+            }
+            return NotFound();
         }
     }
 }

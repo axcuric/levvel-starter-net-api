@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace LvvlStarterNetApi.SharedKernel.Interfaces
 {
-    public interface IRepositoryManager<T> 
+    public interface IRepositoryManager<T>
     {
         IReadService<T> ReadService { get; }
         IWriteService<T> WriteService { get; }
+
         bool Save();
+
         Task<bool> SaveAsync();
     }
 }

@@ -1,18 +1,17 @@
 ﻿using AutoMapper;
 using LvvlStarterNetApi.Core.Dtos;
 using LvvlStarterNetApi.Core.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace LvvlStarterNetApi.Api
 {
-    public class MappingProfile: Profile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
         {
-            CreateMap<User, UserDto>();
+            CreateMap<User, UserDto>()
+                .ForMember(c => c.PhoneNumber,
+                 opt => opt.MapFrom(x => x.Phones.Select(n => n.PhoneNumber).FirstOrDefault()));
         }
     }
 }

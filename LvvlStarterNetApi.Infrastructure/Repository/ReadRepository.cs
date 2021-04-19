@@ -6,26 +6,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LvvlStarterNetApi.Infrastructure.Repository
 {
     public class ReadRepository<T> : IReadService<T> where T : class
     {
         private readonly CliDbExampleContext _context;
+
         public ReadRepository(CliDbExampleContext context)
         {
             _context = context;
         }
 
-        public IQueryable<T> GetAll(bool trackChanges = true) =>
-            !trackChanges ? _context.Set<T>().AsNoTracking() : _context.Set<T>();
+        public IQueryable<T> GetAll(bool trackChanges = true)
+        {
+            var result = !trackChanges ? _context.Set<T>().AsNoTracking() : _context.Set<T>();
+
+
+            if (trackChanges == true && result != null)
+            {
+                foreach (var record in result)
+                {
+                    var (collections, references) = GetEntityNames();
+
+                    // Eager load all the tables referenced by the generic type T
+                    foreach (var entity in collections)
+                        _context.Entry(record).Collection(entity).Load();
+
+                    foreach (var entity in references)
+                        _context.Entry(record).Reference(entity).Load();
+                }
+                
+            }
+
+            return result;
+
+        }
+            
 
         public T GetById(int id)
         {
-            //_context.Set<T>().Find(new object[] { id });
-
             var record = _context.Set<T>().Find(new object[] { id });
 
             if (record != null)
@@ -65,7 +85,6 @@ namespace LvvlStarterNetApi.Infrastructure.Repository
 
             return (collections: collections, references: classes);
         }
-
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges) =>
            !trackChanges ?

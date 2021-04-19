@@ -2,10 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LvvlStarterNetApi.Infrastructure.Context.Data
 {
@@ -16,7 +12,8 @@ namespace LvvlStarterNetApi.Infrastructure.Context.Data
             using (var context = new CliDbExampleContext(
                 serviceProvider.GetRequiredService<DbContextOptions<CliDbExampleContext>>()))
             {
-                #region Users 
+                #region Users
+
                 context.Users.AddRange(
                     new User
                     {
@@ -159,9 +156,10 @@ namespace LvvlStarterNetApi.Infrastructure.Context.Data
                         EmailAddress = "wanida0@adventure-works.com"
                     }
                     );
-                #endregion
 
-                #region Phones 
+                #endregion Users
+
+                #region Phones
 
                 context.Phones.AddRange(
 
@@ -281,7 +279,8 @@ namespace LvvlStarterNetApi.Infrastructure.Context.Data
                         UserId = 20
                     }
                     );
-                #endregion
+
+                #endregion Phones
 
                 context.SaveChanges();
             }
