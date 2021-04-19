@@ -12,36 +12,18 @@ namespace LvvlStarterNetApi.Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly ILoggerService _logger;
-        private readonly IUserService<User> _userService;
+        private readonly IRepositoryManager<User> _repositoryManager;
         private readonly IMapper _mapper;
 
-        public UserController(ILoggerService logger, IUserService<User> userService, IMapper mapper)
+        public UserController(ILoggerService logger, 
+            IRepositoryManager<User> repositoryManager,
+            IMapper mapper)
         {
             _logger = logger;
-            _userService = userService;
+            _repositoryManager = repositoryManager;
             _mapper = mapper;
         }
-
-        /// <summary>
-        /// Deletes an User to the Db by a given Id.
-        /// </summary>
-        /// <param name="user">User to delete.</param>
-        /// <response code="204">Returned if the User was deleted</response>
-        /// <response code="404">Returned if User wasn&#8217;t found</response>
-        [HttpDelete]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(404)]
-        //TODO: change from User model to string id
-        public IActionResult Delete(User user)
-        {
-            _logger.LogInfo("Enters Delete");
-            if (_userService.Delete(user))
-            {
-                return NoContent();
-            }
-            return NotFound();
-        }
-
+        
         /// <summary>
         /// Retrieves all Users from the Db.
         /// </summary>
@@ -53,13 +35,12 @@ namespace LvvlStarterNetApi.Api.Controllers
         public IActionResult Get()
         {
             _logger.LogInfo("Enters Get");
-            var users = _userService.Get();
+            var users = _repositoryManager.ReadService.GetAll(true);
             if (users == null)
             {
                 return NotFound();
             }
-            var userDtos = _mapper.Map<IEnumerable<UserDto>>(users);
-            return Ok(userDtos);
+            return Ok(_mapper.Map<IEnumerable<UserDto>>(users));
         }
 
         /// <summary>
@@ -71,10 +52,10 @@ namespace LvvlStarterNetApi.Api.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public IActionResult GetExampleItemById(int id)
+        public IActionResult GetById(int id)
         {
             _logger.LogInfo("Enters GetExampleItemById");
-            var user = _userService.GetById(id);
+            var user = _repositoryManager.ReadService.GetById(id);
             if (user == null)
             {
                 return NotFound();
@@ -101,7 +82,10 @@ namespace LvvlStarterNetApi.Api.Controllers
             {
                 return BadRequest("User object is null");
             }
-            if (_userService.Update(user))
+
+            _repositoryManager.WriteService.Update(user);
+
+            if (_repositoryManager.Save())
             {
                 return Ok();
             }
@@ -125,12 +109,39 @@ namespace LvvlStarterNetApi.Api.Controllers
                 return BadRequest("User object is null");
             }
 
-            if (_userService.Add(user))
+            _repositoryManager.WriteService.Create(user);
+
+            if (_repositoryManager.Save())
             {
-                //TODO: Change to CreatedAtAction
                 return Ok();
             }
             return BadRequest();
+        }
+
+        /// <summary>
+        /// Deletes an User to the Db by a given Id.
+        /// </summary>
+        /// <param name="id">User ID to delete.</param>
+        /// <response code="204">Returned if the User was deleted</response>
+        /// <response code="404">Returned if User wasn&#8217;t found</response>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult Delete(int id)
+        {
+            _logger.LogInfo("Enters Delete");
+
+            var user = _repositoryManager.ReadService.GetById(id);
+            if (user != null)
+            {
+                _repositoryManager.WriteService.Delete(user);
+
+                if (_repositoryManager.Save())
+                {
+                    return NoContent();
+                }                
+            }
+            return NotFound();
         }
     }
 }

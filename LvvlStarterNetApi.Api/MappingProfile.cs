@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using LvvlStarterNetApi.Core.Dtos;
 using LvvlStarterNetApi.Core.Models;
+using System.Linq;
 
 namespace LvvlStarterNetApi.Api
 {
@@ -8,7 +9,9 @@ namespace LvvlStarterNetApi.Api
     {
         public MappingProfile()
         {
-            CreateMap<User, UserDto>();
+            CreateMap<User, UserDto>()
+                .ForMember(c => c.PhoneNumber,
+                 opt => opt.MapFrom(x => x.Phones.Select(n => n.PhoneNumber).FirstOrDefault()));
         }
     }
 }

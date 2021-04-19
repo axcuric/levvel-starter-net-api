@@ -1,5 +1,4 @@
 ﻿using LvvlStarterNetApi.Core.Models;
-using LvvlStarterNetApi.Core.Services;
 using LvvlStarterNetApi.Infrastructure;
 using LvvlStarterNetApi.Infrastructure.Context;
 using LvvlStarterNetApi.SharedKernel.Interfaces;
@@ -20,7 +19,6 @@ namespace LvvlStarterNetApi.Api.Extensions
         public static void ConfigureScopedServices(this IServiceCollection service)
         {
             service.AddScoped<IRepositoryManager<User>, RepositoryManager<User>>();
-            service.AddScoped<IUserService<User>, UserService>();
         }
 
         public static void ConfigureCors(this IServiceCollection services) =>
