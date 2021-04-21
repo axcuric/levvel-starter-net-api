@@ -4,6 +4,7 @@ using LvvlStarterNetApi.Core.Models;
 using LvvlStarterNetApi.SharedKernel.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LvvlStarterNetApi.Api.Controllers
 {
@@ -14,14 +15,17 @@ namespace LvvlStarterNetApi.Api.Controllers
         private readonly ILoggerService _logger;
         private readonly IRepositoryManager<User> _repositoryManager;
         private readonly IMapper _mapper;
+        private readonly ICommonServices<User> _userService;
 
         public UserController(ILoggerService logger, 
             IRepositoryManager<User> repositoryManager,
+            ICommonServices<User> userService,
             IMapper mapper)
         {
             _logger = logger;
             _repositoryManager = repositoryManager;
             _mapper = mapper;
+            _userService = userService;
         }
         
         /// <summary>
@@ -62,6 +66,23 @@ namespace LvvlStarterNetApi.Api.Controllers
             }
             var userDto = _mapper.Map<UserDto>(user);
             return Ok(userDto);
+        }
+
+        /// <summary>
+        /// Count the Users 
+        /// </summary>
+        /// <returns>Integer</returns>
+        [HttpGet("[action]")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public IActionResult GetTotalUserCount()
+        {
+            IQueryable<User> users = _repositoryManager.ReadService.GetAll(true);
+            if(users != default(User))
+            {
+                return Ok(_userService.Count(users));
+            }
+            return BadRequest("User object is null");
         }
 
         /// <summary>
@@ -143,5 +164,7 @@ namespace LvvlStarterNetApi.Api.Controllers
             }
             return NotFound();
         }
+
+        
     }
 }
