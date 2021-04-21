@@ -1,12 +1,7 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using LvvlStarterNetApi.Core.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
 
 namespace LvvlStarterNetApi.Api
 {
@@ -30,14 +25,15 @@ namespace LvvlStarterNetApi.Api
             {
                 return "Userid could not be Empty.";
             }
-            /*else {  
-                if (UserId == "Admin" && Password == "Admin") {  
-                    return "Welcome Admin.";  
-                }  
-                return "Incorrect UserId or Password.";  
+            /*else {
+                if (UserId == "Admin" && Password == "Admin") {
+                    return "Welcome Admin.";
+                }
+                return "Incorrect UserId or Password.";
             } */
             return "Welcome Admin.";
         }
+
         public List<User> AllUsers()
         {
             List<User> li = new List<User>();
@@ -46,24 +42,25 @@ namespace LvvlStarterNetApi.Api
                 UserId = 100,
                 FirstName = "Cloud",
                 LastName = "Seventh",
-                EmailAddress = "omni-slash@ff7.com"//, //Phones = 1093425  
+                EmailAddress = "omni-slash@ff7.com"//, Phones = 1093425
             });
             li.Add(new User
             {
                 UserId = 101,
                 FirstName = "Light",
                 LastName = "Yagami",
-                EmailAddress = "kira@deathnote.com"//, //Phones = 1093425  
+                EmailAddress = "kira@deathnote.com"//, //Phones = 1093425
             });
             li.Add(new User
             {
                 UserId = 106,
                 FirstName = "Terra",
                 LastName = "Esper",
-                EmailAddress = "magi.tek@ff6.com"//, //Phones = 1093425  
+                EmailAddress = "magi.tek@ff6.com"//, //Phones = 1093425
             });
             return li;
         }
+
         public List<User> getDetails(int id)
         {
             List<User> li1 = new List<User>();
@@ -78,6 +75,7 @@ namespace LvvlStarterNetApi.Api
             }
             return li1;
         }
+
         public List<Phone> AllPhones()
         {
             List<Phone> li = new List<Phone>();

@@ -24,7 +24,7 @@ namespace LvvlStarterNetApi.Tests
                 Assert.IsNotNull(x.FirstName);
                 Assert.IsNotNull(x.LastName);
                 Assert.IsNotNull(x.EmailAddress);
-                //Assert.IsNotNull(x.Phones);
+                Assert.IsNotNull(x.Phones);
             }
         }
         //[Test]
