@@ -94,7 +94,7 @@ namespace LvvlStarterNetApi.Api.Controllers
         [ProducesResponseType(404)]
         public IActionResult GetUsersByFirstName(string userFirstName)
         {
-            IQueryable<IUser> users = _repositoryManager.ReadService.GetAll(true);
+            IQueryable<User> users = _repositoryManager.ReadService.GetAll(true);
 
             if (users != null)
             {
