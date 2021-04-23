@@ -15,11 +15,11 @@ namespace LvvlStarterNetApi.Api.Controllers
         private readonly ILoggerService _logger;
         private readonly IRepositoryManager<User> _repositoryManager;
         private readonly IMapper _mapper;
-        private readonly ICommonServices<User> _userService;
+        private readonly IUserService _userService;
 
         public UserController(ILoggerService logger, 
             IRepositoryManager<User> repositoryManager,
-            ICommonServices<User> userService,
+            IUserService userService,
             IMapper mapper)
         {
             _logger = logger;
@@ -78,9 +78,27 @@ namespace LvvlStarterNetApi.Api.Controllers
         public IActionResult GetTotalUserCount()
         {
             IQueryable<User> users = _repositoryManager.ReadService.GetAll(true);
-            if(users != default(User))
+            if(users != null)
             {
                 return Ok(_userService.Count(users));
+            }
+            return BadRequest("User object is null");
+        }
+
+        /// <summary>
+        /// Find Users with by First Name 
+        /// </summary>
+        /// <returns>Integer</returns>
+        [HttpGet("[action]/{userFirstName}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public IActionResult GetUsersByFirstName(string userFirstName)
+        {
+            IQueryable<IUser> users = _repositoryManager.ReadService.GetAll(true);
+
+            if (users != null)
+            {
+                return Ok(_userService.FindUserFirstName(users, userFirstName));
             }
             return BadRequest("User object is null");
         }
