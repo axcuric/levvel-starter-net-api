@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using LvvlStarterNetApi.SharedKernel.Interfaces;
+using System.Collections.Generic;
 
 namespace LvvlStarterNetApi.Core.Models
 {
-    public partial class User
+    public partial class User : IUser
     {
         public User()
         {

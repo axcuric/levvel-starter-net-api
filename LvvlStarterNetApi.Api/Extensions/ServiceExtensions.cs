@@ -20,7 +20,10 @@ namespace LvvlStarterNetApi.Api.Extensions
         public static void ConfigureScopedServices(this IServiceCollection service)
         {
             service.AddScoped<IRepositoryManager<User>, RepositoryManager<User>>();
-            service.AddScoped<ICommonServices<User>, UserService>();
+            service.AddScoped<IUserService, UserService>();
+            service.AddScoped<IUser, User>();
+            service.AddScoped<IPhone, Phone>();
+
         }
 
         public static void ConfigureCors(this IServiceCollection services) =>

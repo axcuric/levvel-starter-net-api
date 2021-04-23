@@ -1,6 +1,8 @@
-﻿namespace LvvlStarterNetApi.Core.Models
+﻿using LvvlStarterNetApi.SharedKernel.Interfaces;
+
+namespace LvvlStarterNetApi.Core.Models
 {
-    public class Phone
+    public class Phone : IPhone
     {
         public int PhoneId { get; set; }
         public string PhoneNumber { get; set; }
