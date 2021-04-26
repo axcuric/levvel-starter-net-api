@@ -2,12 +2,12 @@
 A starter project for an API [.NET 5.0](https://dotnet.microsoft.com/download/dotnet/5.0) and [Entity Framework](https://docs.microsoft.com/en-us/ef/)
 
 ## Overview
-This repository offers a basic structure for an Api project following a Clean Architecture. Swagger is added for an easy and quicker implementation. It already holds controllers, models, services, interfaces and a generic repository pattern that will help with the communication between the Api and our database. An In Memory database is set as default, as well a logging service with Nlog.
+This repository offers an essential structure for a RestAPI project following a Clean Architecture. Swagger added for easy and quicker implementation. It already holds controllers, models, services, interfaces, and a generic repository pattern to help communicate between the RestAPI and our database. In-Memory database as default, as well as a logging service with Nlog.
 
 ## Getting Started
-Make sure you already have downloaded the [.Net 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0).
+Make sure you already have installed the [.Net 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0).
 
-If you use the Lvl Cli to download the repo you can skip this steps, the Cli already did this for you!
+If you use the Lvl Cli to download the repo, you can skip these steps. The lvl_cli already did this for you!
 1. Clone the repo
 ```bash
 git clone git@github.com:GetLevvel/levvel-starter-net-api.git
