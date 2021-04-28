@@ -37,6 +37,24 @@ dotnet run
 
 ## Available Commands
 
+The following commands works only with the Levvel CLI:
+
+1. New: creates a new .Net project from scratch with the default structure
+```bash
+lvl new net-api <projectName>
+```
+
+2. Generate: Creates a single component file (interface, controller or service) for your .Net project.
+```bash
+lvl generate net-api interface <interfaceName>
+
+lvl generate net-api controller <controllerName>
+
+lvl generate net-api service <serviceName>
+```
+Creating these files will automatically add it respective prefix/sufix for each file type as follows: 
+"<name>Controller" for controllers, "I<name>" for interfaces and "<name>Service" for services
+
 ## Features
 
 ### Clean Architecture
