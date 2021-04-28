@@ -54,7 +54,7 @@ There are two main Generic Repositories, ReadRepository<T>, and WriteRepository<
 1)	Let’s create a Repository with the Name “Car” which will have properties like Id, Model, etc.
 ```
 ```bash
-2)	In the ServiceExtensions static class, you need to add the Scoped (or any servicetype that apply) service like this: service.AddScoped<ICar, Car>();
+2)	In the ServiceExtensions static class, you need to add the Scoped (or any servicetype that apply) like this: service.AddScoped<ICar, Car>();
 ```
 ```bash
 3)	In the controller’s constructor you need to inject it like this: 
