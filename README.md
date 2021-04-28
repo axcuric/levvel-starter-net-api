@@ -46,5 +46,54 @@ dotnet run
 ### Design Patterns
 
 #### Repository Pattern
+There are two main Generic Repositories, ReadRepository<T>, and WriteRepository<T>, and the way to use them is with the RepositoryManager<T>.
+  Once a new Model is created, there is no need to extend the read, and write actions of a repository, instead we can use the Generic RepositoryManager to read or write to the Database.
+
+ Example:
+```bash
+1)	Let’s create a Repository with the Name “Car” which will have properties like Id, Model, etc.
+```
+```bash
+2)	In the ServiceExtensions static class, you need to add the Scoped (or any servicetype that apply) service like this: service.AddScoped<ICar, Car>();
+```
+```bash
+3)	In the controller’s constructor you need to inject it like this: 
+private readonly IRepositoryManager<Car> _repositoryManager;       
+       public CarController(ILoggerService logger, 
+            IRepositoryManager<Car> repositoryManager,
+            IUserService userService,
+            IMapper mapper)
+            {
+            _logger = logger;
+            _repositoryManager = repositoryManager;
+            _mapper = mapper;
+            _userService = userService;
+      }
+```
+
+```bash
+4)	And then you can use it inside of any method that you create like this:
+a.	_repositoryManager.ReadService.GetAll(true);
+
+b.	_repositoryManager.ReadService.GetById(id);
+
+c.	repositoryManager.WriteService.Update(car);
+if (_repositoryManager.Save())
+{
+    return Ok();
+}
+return NotFound();
+```
+
+
+
+
+
+
+
+
+
+
+
 
 ### Unit tests
