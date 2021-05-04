@@ -27,13 +27,12 @@ dotnet run
 4. Enjoy!
 
 ## Dependencies/Plugins Added
+* [Clean Architecture](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures#clean-architecture)
 * [Swagger](https://docs.microsoft.com/en-us/aspnet/core/tutorials/web-api-help-pages-using-swagger?view=aspnetcore-5.0)
 * [Entity Framework](https://docs.microsoft.com/en-us/ef/)
 * [Entity Framework SqlServer](https://docs.microsoft.com/en-us/ef/core/providers/sql-server/?tabs=dotnet-core-cli)
 * [AutoMapper](https://automapper.org/)
 * [NLog](https://github.com/NLog/NLog/wiki/Getting-started-with-ASP.NET-Core-5)
-
-## Configuration Files
 
 ## Available Commands
 
@@ -55,11 +54,48 @@ lvl generate net-api service <serviceName>
 Creating these files will automatically add it respective prefix/sufix for each file type as follows: 
 "<name>Controller" for controllers, "I<name>" for interfaces and "<name>Service" for services
 
+## Configuration Files
+First things first.
+Where all the API configuration takes part. This method calls the configurations of the Api, instead of having the Startup.cs doing everything.
+```bash
+Startup.cs
+public void ConfigureServices(IServiceCollection services)
+```
+
+When you add a new Service, Interface, Model, or RepositoryManager, you WILL need to add this to our ConfigureScopedServices. Be sure to double check this method, this will give you a 500 Internal Server Error when trying to test your Api.
+
+```bash
+public static class ServiceExtensions
+public static void ConfigureScopedServices(this IServiceCollection service)
+```
+
+This configures Swagger to add the comments as documentation to our Swagger starter page.
+
+```bash
+public static void ConfigureSwagger(this IServiceCollection services)
+```
+
+On Layer SharedKernel we will find NLog dependency. There's the Nlog.config file, please give it a look, since we default some values as the folder where the logs will be saved, files names, and added an internal config as well.
+
 ## Features
 
 ### Clean Architecture
+This architecture separates business logic and application model at the center of the application. Instead of having business logic depend on data access or other infrastructure concerns, this dependency is inverted: infrastructure and implementation details depend on the Core. This functionality is achieved by defining abstractions, or interfaces, in the Core, which are then implemented by types defined in the Infrastructure layer. And our sharedKernel manages services that will be accessible all over the solution, 
 
 ### Swagger
+Swagger is a super useful tool that helps us with the API Design, Development, Documentation and Testing which is what is intially on this repo.
+
+Just by adding a new controller and writting some comments on top of your methods on the API it would automatically generate a nice looking web page with all the web methods and their response codes, response types and request types as well.
+
+
+Here's an example of the comments for your controllers:
+```bash
+  /// <summary>
+  /// Retrieves all Users from the Db.
+  /// </summary>
+  /// <response code="200">Returned if the User was created</response>
+  /// <response code="404">Returned if the User items weren&#8217;t found</response>
+```
 
 ### Design Patterns
 
