@@ -50,7 +50,7 @@ namespace LvvlStarterNetApi.Api.Controllers
         /// <summary>
         /// Retrieves a single User by Id from the Db.
         /// </summary>
-        /// <param name="id">Id from User to delete.</param>
+        /// <param name="id">Id from User to retrieve.</param>
         /// <response code="200">Returned if the Users was found and retrieved</response>
         /// <response code="404">Returned if the User wasn&#8217;t found on the Db</response>
         [HttpGet("{id}")]
@@ -163,7 +163,7 @@ namespace LvvlStarterNetApi.Api.Controllers
         /// <param name="id">User ID to delete.</param>
         /// <response code="204">Returned if the User was deleted</response>
         /// <response code="404">Returned if User wasn&#8217;t found</response>
-        [HttpDelete("{id}")]
+        [HttpDelete]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
         public IActionResult Delete(int id)
